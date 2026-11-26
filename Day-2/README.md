@@ -1,60 +1,71 @@
-# Day 2 - Sweet Crumbs Home Bakery AI Assistant
+# Day 2 - CampusKart AI Assistant
 
-## Business idea
-Sweet Crumbs is a small home bakery that sells plum cakes, chocolate cakes, and cupcakes. This project adapts the Day 2 AI-agent exercises to a bakery customer-support use case.
+**Drive Ready - AI Agents | One Person Company (OPC) Initiative**
 
-## Sample product catalogue
+## Objective
+
+Apply the Day 2 AI-agent concepts to CampusKart, a stationery store serving college students. The assistant supports product-price enquiries, customer conversations, message classification, order extraction, and prompt-safety checking.
+
+## Business use case: CampusKart
 
 | Product | Price |
 |---|---:|
-| Plum cake | Rs. 500 |
-| Chocolate cake | Rs. 650 |
-| Cupcake | Rs. 80 |
+| Notebook | ₹60 |
+| Blue pen | ₹10 |
+| Pencil | ₹5 |
+| Geometry box | ₹120 |
+| College record book | ₹80 |
 
-Business rules:
-- Orders require at least 24 hours' notice.
-- Eggless versions are available for cakes.
-- The assistant must not invent prices or promise delivery times.
-- Unknown information should be referred to the owner.
+The assistant must not invent stock, discounts, or delivery details. If information is unavailable, it says: **"I'll check with the store owner."**
 
-## Concepts demonstrated
-- Business-specific system prompts
-- Groq LLM integration
-- Product catalogue and price calculation function
-- Conversation memory
-- API rate-limit and connection error handling
-- Customer message classification (order, question, complaint)
-- Order detail extraction into JSON
-- Prompt safety demonstration using Groq Prompt Guard
+## Concepts implemented
 
-## Setup
+1. Groq API client setup.
+2. Business-specific system prompt.
+3. Logging decorator for function calls.
+4. Product price lookup and quantity-based total calculation.
+5. Conversation history with a maximum retained-turn window.
+6. API error handling for rate limits and connection failures.
+7. Customer-message classification into `order`, `question`, or `complaint`.
+8. Structured order extraction into JSON.
+9. Prompt-safety demonstration using Prompt Guard.
 
-1. Install Python 3.10 or later.
-2. Install the required packages:
+## Files
 
-   ```bash
-   pip install groq
-   ```
+```text
+Day-2/
+├── task.py
+└── README.md
+```
 
-3. Set your Groq API key as an environment variable.
+## Setup and execution
 
-   **Windows PowerShell:**
-   ```powershell
-   $env:GROQ_API_KEY="your_groq_api_key"
-   ```
+### 1. Install the package
 
-   **macOS / Linux:**
-   ```bash
-   export GROQ_API_KEY="your_groq_api_key"
-   ```
+```bash
+pip install groq
+```
 
-4. Run the program:
+### 2. Configure the Groq API key
 
-   ```bash
-   python task.py
-   ```
+In Google Colab, add a secret named `GROQ_API_KEY` and allow notebook access to it.
 
-5. Choose `1` to run the demonstrations or `2` to start the customer chat.
+For local execution, set `GROQ_API_KEY` as an environment variable. Never paste the key directly into this file or commit it to GitHub.
+
+### 3. Run
+
+```bash
+python task.py
+```
+
+The script demonstrates price lookup, customer chat, classification, JSON order extraction, and prompt safety.
+
+## Model note
+
+The script retains the model names used in the Day 2 exercise: `openai/gpt-oss-120b` and `meta-llama/llama-prompt-guard-2-22m`. Availability depends on your Groq account and current API access. If a model is unavailable, select an available compatible model in your Groq console and update the corresponding constant.
 
 ## Security
-Do not paste your real API key into this file or commit it to the public GitHub repository. Keep it in an environment variable or a secrets manager.
+
+- Do not upload API keys to GitHub.
+- Do not commit `.env` files containing secrets.
+- Use Colab Secrets or environment variables.
